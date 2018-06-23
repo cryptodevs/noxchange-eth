@@ -22,14 +22,11 @@ app.get('/new-tx', (req, res) => {
     address: account.address,
     buyerAddress,
     qty,
-    U1: 'nico',
-    U2: 'joaco',
     state: 'WAITING_FOR_BALANCE',
-    rate: 'XX',
   }
   S[o.id] = o
   console.log('added to S', o)
-  res.send({'adress': account.address})
+  res.send({'address': account.address})
 })
 
 // watch last txs to chek for our balances
@@ -49,7 +46,7 @@ var subscription = web3.eth.subscribe('newBlockHeaders', function(error, result)
           console.log('CHECK BALANCE', o.address, balance)
           if (balance  >= o.qty) {
             S[o.id]['state'] = 'BALANCE_OK'
-            console.log('BALANCE_OK', o)
+            console.log('BALANCE_OK', result.hash, o)
           }
         })
       }
