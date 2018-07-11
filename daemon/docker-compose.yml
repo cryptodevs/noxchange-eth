@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  eth:
+    build: ./
+    container_name: noxeth
+    command: npm start
+    volumes:
+      - ./app/:/usr/src/app/app/
+    ports:
+      - "3009:3009"
+    networks:
+      - noxchangeapi_nox-net
+
+networks:
+  noxchangeapi_nox-net:
+    external: true

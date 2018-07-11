@@ -1,9 +1,9 @@
 const express = require('express')
 const app = express()
 
-var Web3 = require('web3');
-var web3 = new Web3();
-web3.setProvider(new Web3.providers.WebsocketProvider('ws://localhost:8546'));
+var Web3 = require('web3')
+var web3 = new Web3()
+web3.setProvider(new Web3.providers.WebsocketProvider('ws://nox-eth-net:8546'))
 
 const entropy = 'YOLO'
 web3.eth.accounts.wallet.clear()
@@ -35,6 +35,7 @@ var subscription = web3.eth.subscribe('newBlockHeaders', function(error, result)
       console.log(error)
       return
     }
+    console.log(result.hash)
     for (let id in S) {
       let o = S[id]
       if (o.state === 'WAITING_FOR_BALANCE') {
