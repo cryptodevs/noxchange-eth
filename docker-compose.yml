@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  db:
+    image: ethereum/client-go
+    container_name: nox-eth-net
+    volumes:
+      - ./chaindata:/root/.ethereum
+    ports:
+      - "8545:8545"
+      - "8546:8546"
+      - "30303:30303"
+    networks:
+      - nox-net
+    command: --rpc --rpcaddr 0.0.0.0  --rpccorsdomain=* --ws --wsaddr 0.0.0.0 --wsorigins=*
+    networks:
+      - noxchangeapi_nox-net
+
+networks:
+  noxchangeapi_nox-net:
+    external: true
