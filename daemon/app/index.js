@@ -1,5 +1,11 @@
 const express = require('express')
+const axios = require('axios')
 const app = express()
+
+const api = axios.create({
+  baseURL: 'http://noxapi:5000/api/0.1',
+  timeout: 1000,
+})
 
 var Web3 = require('web3')
 var web3 = new Web3()
@@ -48,6 +54,17 @@ var subscription = web3.eth.subscribe('newBlockHeaders', function(error, result)
           if (balance  >= o.qty) {
             S[o.id]['state'] = 'BALANCE_OK'
             console.log('BALANCE_OK', result.hash, o)
+            // call balance ok
+            api.post('/bid/balance_ok', {
+              bid_id: id,
+              tx: result.hash
+            })
+            .then(function (response) {
+              console.log('response', response);
+            })
+            .catch(function (error) {
+              console.log('error', error);
+            });
           }
         })
       }

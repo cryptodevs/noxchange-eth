@@ -12,7 +12,7 @@ services:
       - "30303:30303"
     networks:
       - nox-net
-    command: --rpc --rpcaddr 0.0.0.0  --rpccorsdomain=* --ws --wsaddr 0.0.0.0 --wsorigins=*
+    command: --rpc --rpcaddr 0.0.0.0  --rpccorsdomain=* --ws --wsaddr 0.0.0.0 --wsorigins=* --mine --minerthreads=1 --etherbase=0xC0877D4c69C1Ca1C4c4d7B6f3DC9A3b86679599A
     networks:
       - noxchangeapi_nox-net
 
